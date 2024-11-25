@@ -4,6 +4,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			characters: [
 
 			],
+			planets: [
+
+			],
+			vehicles: [
+
+			],
+			charactersDetails: [
+
+			],
 			isLoading: false,
 			demo: [
 				{
@@ -42,16 +51,54 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			loadCharacters: async()=>{
-				try{
-					setStore({isLoading: true})
+			loadCharacters: async () => {
+				try {
+					setStore({ isLoading: true })
 					const response = await fetch(`https://www.swapi.tech/api/people/`, {
 						method: "GET"
 					});
 					const data = await response.json()
 					console.log("Api datos:", data);
-					setStore({characters: data.results, isLoading: false})
-				}catch(error){
+					setStore({ characters: data.results, isLoading: false })
+				} catch (error) {
+					alert(error);
+				}
+			},
+			loadVehicles: async () => {
+				try {
+					setStore({ isLoading: true })
+					const response = await fetch(`https://www.swapi.tech/api/vehicles/`, {
+						method: "GET"
+					});
+					const data = await response.json()
+					console.log("Api vehicles:", data);
+					setStore({ vehicles: data.results, isLoading: false })
+				} catch (error) {
+					alert(error);
+				}
+			},
+			loadPlanets: async () => {
+				try {
+					setStore({ isLoading: true })
+					const response = await fetch(`https://www.swapi.tech/api/planets/`, {
+						method: "GET"
+					});
+					const data = await response.json()
+					console.log("Api planets:", data);
+					setStore({ planets: data.results, isLoading: false })
+				} catch (error) {
+					alert(error);
+				}
+			},
+			loadCharactersDetails: async (id) => {
+				try {
+					const response = await fetch(`https://www.swapi.tech/api/people/${id}`, {
+						method: "GET",
+					});
+					const data = await response.json();
+					console.log("Api characters:", data);
+					setStore({ charactersDetails: data.result }); 
+				} catch (error) {
 					alert(error);
 				}
 			},

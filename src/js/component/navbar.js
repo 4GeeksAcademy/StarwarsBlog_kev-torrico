@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const Navbar = () => {
+export const Navbar = ({ favorites, setFavorites }) => {
+	const handleRemoveFavorite = (index) => {
+        const updatedFavorites = favorites.filter((_, i) => i !== index);
+        setFavorites(updatedFavorites);
+    };
+
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 			<div className="container-fluid">
@@ -23,13 +28,13 @@ export const Navbar = () => {
 							<a className="nav-link" href="#starWarsCarousel" style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}>Home</a>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#starWarsCarousel" style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}>Characters</a>
+							<a className="nav-link" href="#characters" style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}>Characters</a>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#starWarsCarousel" style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}>Planets</a>
+							<a className="nav-link" href="#vehicles" style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}>Vehicles</a>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#starWarsCarousel" style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}>Vehicles</a>
+							<a className="nav-link" href="#planets" style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}>Planets</a>
 						</li>
 						<li>
 							<div className="btn-group">
@@ -49,10 +54,20 @@ export const Navbar = () => {
 								>
 									Favorites
 								</button>
-								<ul className="dropdown-menu bg-secondary">
-									<li className="text-warning">
-										<a className="dropdown-item" href="#">Hola</a>
-									</li>
+								<ul className="dropdown-menu" aria-labelledby="favoritesDropdown">
+									{favorites.length === 0 ? (
+										<li>
+											<span className="dropdown-item">No favorites added</span>
+										</li>
+									) : (
+										favorites.map((name, index) => (
+											<li key={index}>
+												<a className="dropdown-item" href="#">
+													{name}
+												</a>
+											</li>
+										))
+									)}
 								</ul>
 							</div>
 						</li>

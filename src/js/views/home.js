@@ -6,19 +6,24 @@ import { useContext } from "react";
 import { getActions } from "../store/flux.js";
 import { useNavigate } from "react-router-dom";
 
-export const Home = () => {
+export const Home = ({ setFavorites }) => {
 	const { store, actions } = useContext(Context);
 	const navigate = useNavigate();
+
+	const handleAddToFavorites = (name) => {
+		setFavorites((prevFavorites) => [...prevFavorites, name]);
+	};
 
 	//nacimiento del componente
 	useEffect(() => {
 		actions.loadCharacters();
+		actions.loadVehicles();
+		actions.loadPlanets();
 	}, [])
-
 
 	return (
 		<div className="text-center home">
-			<h1>STAR WARS!</h1>
+			<h1 style={{ margin: "75px 0 30px" }}>STAR WARS!</h1>
 			<div id="starWarsCarousel" className="carousel slide mt-2 mb-2" data-bs-ride="carousel">
 				<div className="carousel-inner">
 					{/* Slide 1: Personajes */}
@@ -64,6 +69,8 @@ export const Home = () => {
 				</div>
 			</div>
 
+
+			<h1 id="characters">CHARACTERS</h1>
 			{
 				store.isLoading &&
 				(
@@ -73,26 +80,71 @@ export const Home = () => {
 				)
 			}
 			<div className="container mt-5">
-				<div className="d-flex overflow-auto" style={{ gap: '1rem', padding: '10px 0' }}>
+				<div className="d-flex overflow-auto" style={{ gap: '1rem', padding: '10px 0' }} >
 					{
-						store.characters.map(people => (
+						store.characters.map(people => {
+							console.log(people); // Verifica la estructura del objeto
+							return (
+								<div className="card" style={{ width: "18rem", flexShrink: 0 }}>
+									<img
+										src={`https://starwars-visualguide.com/assets/img/characters/${people.uid}.jpg`}
+										className="card-img-top"
+										alt="Character"
+									/>
+									<div className="card-body">
+										<h5 className="card-title">{people.name}</h5>
+										<button className="btn btn-dark text-light mt-2 w-100 star-wars-btn">More Details</button>
+										<button className="btn btn-warning mt-2 w-100 star-wars-btn" onClick={() => handleAddToFavorites(people.name)}>Add to Favorites</button>
+									</div>
+								</div>
+							);
+						})
+					}
+
+				</div>
+			</div>
+			<h1 id="vehicles">VEHICLES</h1>
+			<div className="container mt-5">
+				<div className="d-flex overflow-auto" style={{ gap: '1rem', padding: '10px 0' }} >
+					{
+						store.vehicles.map(vehicle => (
 							<div className="card" style={{ width: "18rem", flexShrink: 0 }}>
 								<img
-									src={`https://starwars-visualguide.com/assets/img/characters/${people.uid}.jpg`}
+									src={`https://starwars-visualguide.com/assets/img/vehicles/${vehicle.uid}.jpg`}
 									className="card-img-top"
 									alt="Character"
 								/>
 								<div className="card-body">
-									<h5 className="card-title">{people.name}</h5>
-									<p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-									<a href="#" className="btn btn-primary">Go somewhere</a>
+									<h5 className="card-title">{vehicle.name}</h5>
+									<button className="btn btn-dark text-light mt-2 w-100 star-wars-btn">More Details</button>
+									<button className="btn btn-warning mt-2 w-100 star-wars-btn" onClick={() => handleAddToFavorites(vehicle.name)}>Add to Favorites</button>
 								</div>
 							</div>
 						))
 					}
 				</div>
 			</div>
-
-		</div>
+			<h1 id="planets">PLANETS</h1>
+			<div className="container mt-5">
+				<div className="d-flex overflow-auto" style={{ gap: '1rem', padding: '10px 0' }}>
+					{
+						store.planets.map(planet => (
+							<div className="card" style={{ width: "18rem", flexShrink: 0 }}>
+								<img
+									src={`https://starwars-visualguide.com/assets/img/planets/${planet.uid}.jpg`}
+									className="card-img-top"
+									alt="Character"
+								/>
+								<div className="card-body">
+									<h5 className="card-title">{planet.name}</h5>
+									<button className="btn btn-dark text-light mt-2 w-100 star-wars-btn">More Details</button>
+									<button className="btn btn-warning mt-2 w-100 star-wars-btn" onClick={() => handleAddToFavorites(planet.name)}>Add to Favorites</button>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</div>
+		</div >
 	)
 };

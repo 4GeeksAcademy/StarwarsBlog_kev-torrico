@@ -23,7 +23,7 @@ export const Home = ({ setFavorites }) => {
 
 	return (
 		<div className="text-center home">
-			<h1 style={{ margin: "75px 0 30px" }}>STAR WARS!</h1>
+			<h1 style={{ margin: "75px 0 30px" }} id="starwarsTitle">STAR WARS!</h1>
 			<div id="starWarsCarousel" className="carousel slide mt-2 mb-2" data-bs-ride="carousel">
 				<div className="carousel-inner">
 					{/* Slide 1: Personajes */}

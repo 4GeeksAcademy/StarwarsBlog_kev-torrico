@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 export const Navbar = ({ favorites, setFavorites }) => {
 	const handleRemoveFavorite = (index) => {
-        const updatedFavorites = favorites.filter((_, i) => i !== index);
-        setFavorites(updatedFavorites);
-    };
+		const updatedFavorites = favorites.filter((_, i) => i !== index);
+		setFavorites(updatedFavorites);
+	};
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -25,7 +25,7 @@ export const Navbar = ({ favorites, setFavorites }) => {
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav ms-auto">
 						<li className="nav-item">
-							<a className="nav-link" href="#starWarsCarousel" style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}>Home</a>
+							<a className="nav-link" href="#starwarsTitle" style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}>Home</a>
 						</li>
 						<li className="nav-item">
 							<a className="nav-link" href="#characters" style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}>Characters</a>
@@ -49,7 +49,7 @@ export const Navbar = ({ favorites, setFavorites }) => {
 										color: '#FFD700',
 										border: '1px solid #FFD700',
 										backgroundColor: '#212529',
-										margin: '0 0 0 10px'
+										margin: '0 20px 0 20px'
 									}}
 								>
 									Favorites
@@ -61,10 +61,15 @@ export const Navbar = ({ favorites, setFavorites }) => {
 										</li>
 									) : (
 										favorites.map((name, index) => (
-											<li key={index}>
-												<a className="dropdown-item" href="#">
-													{name}
-												</a>
+											<li key={index} className="d-flex justify-content-between align-items-center" style={{ marginLeft: "10px", marginRight: "10px" }}>
+												<span>{name}</span>
+												<button
+													className="btn btn-danger btn-sm"
+													onClick={() => handleRemoveFavorite(index)}
+													style={{ marginLeft: "10px", marginTop: "5px" }}
+												>
+													<i className="fas fa-trash"></i>
+												</button>
 											</li>
 										))
 									)}

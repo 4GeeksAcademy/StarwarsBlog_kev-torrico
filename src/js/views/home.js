@@ -14,6 +14,17 @@ export const Home = ({ setFavorites }) => {
 		setFavorites((prevFavorites) => [...prevFavorites, name]);
 	};
 
+	const handleCharacterDetails = (id) => {
+		navigate(`/character/${id}`);
+	};
+	const handleVehicleDetails = (id) => {
+		navigate(`/vehicle/${id}`);
+	};
+	const handlePlanetDetails = (id) => {
+		navigate(`/planet/${id}`);
+	};
+
+
 	//nacimiento del componente
 	useEffect(() => {
 		actions.loadCharacters();
@@ -26,7 +37,7 @@ export const Home = ({ setFavorites }) => {
 			<h1 style={{ margin: "75px 0 30px" }} id="starwarsTitle">STAR WARS!</h1>
 			<div id="starWarsCarousel" className="carousel slide mt-2 mb-2" data-bs-ride="carousel">
 				<div className="carousel-inner">
-					{/* Slide 1: Personajes */}
+					
 					<div className="carousel-item active">
 						<img src="https://starwars-visualguide.com/assets/img/characters/4.jpg" className="d-block w-100" alt="Personajes" />
 						<div className="carousel-caption d-md-block">
@@ -37,7 +48,7 @@ export const Home = ({ setFavorites }) => {
 						</div>
 					</div>
 
-					{/* Slide 2: Planetas */}
+					
 					<div className="carousel-item">
 						<img src="https://starwars-visualguide.com/assets/img/planets/10.jpg" className="d-block w-100" alt="Planetas" />
 						<div className="carousel-caption d-md-block">
@@ -83,7 +94,7 @@ export const Home = ({ setFavorites }) => {
 				<div className="d-flex overflow-auto" style={{ gap: '1rem', padding: '10px 0' }} >
 					{
 						store.characters.map(people => {
-							console.log(people); // Verifica la estructura del objeto
+							console.log(people);
 							return (
 								<div className="card" style={{ width: "18rem", flexShrink: 0 }}>
 									<img
@@ -93,7 +104,15 @@ export const Home = ({ setFavorites }) => {
 									/>
 									<div className="card-body">
 										<h5 className="card-title">{people.name}</h5>
-										<button className="btn btn-dark text-light mt-2 w-100 star-wars-btn">More Details</button>
+										<button
+											className="btn btn-dark text-light mt-2 w-100 star-wars-btn"
+											onClick={() => {
+												window.scrollTo(0, 0);
+												handleCharacterDetails(people.uid);
+											}}
+										>
+											More Details
+										</button>
 										<button className="btn btn-warning mt-2 w-100 star-wars-btn" onClick={() => handleAddToFavorites(people.name)}>Add to Favorites</button>
 									</div>
 								</div>
@@ -116,7 +135,15 @@ export const Home = ({ setFavorites }) => {
 								/>
 								<div className="card-body">
 									<h5 className="card-title">{vehicle.name}</h5>
-									<button className="btn btn-dark text-light mt-2 w-100 star-wars-btn">More Details</button>
+									<button
+										className="btn btn-dark text-light mt-2 w-100 star-wars-btn"
+										onClick={() => {
+											window.scrollTo(0, 0);
+											handleVehicleDetails(vehicle.uid);
+										}}
+									>
+										More Details
+									</button>
 									<button className="btn btn-warning mt-2 w-100 star-wars-btn" onClick={() => handleAddToFavorites(vehicle.name)}>Add to Favorites</button>
 								</div>
 							</div>
@@ -137,7 +164,15 @@ export const Home = ({ setFavorites }) => {
 								/>
 								<div className="card-body">
 									<h5 className="card-title">{planet.name}</h5>
-									<button className="btn btn-dark text-light mt-2 w-100 star-wars-btn">More Details</button>
+									<button
+										className="btn btn-dark text-light mt-2 w-100 star-wars-btn"
+										onClick={() => {
+											window.scrollTo(0, 0);
+											handlePlanetDetails(planet.uid);
+										}}
+									>
+										More Details
+									</button>
 									<button className="btn btn-warning mt-2 w-100 star-wars-btn" onClick={() => handleAddToFavorites(planet.name)}>Add to Favorites</button>
 								</div>
 							</div>

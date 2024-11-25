@@ -13,6 +13,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			charactersDetails: [
 
 			],
+			planetsDetails: [
+
+			],
+			vehiclesDetails: [
+
+			],
 			isLoading: false,
 			demo: [
 				{
@@ -61,7 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Api datos:", data);
 					setStore({ characters: data.results, isLoading: false })
 				} catch (error) {
-					alert(error);
+					console.log(error);
 				}
 			},
 			loadVehicles: async () => {
@@ -87,19 +93,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Api planets:", data);
 					setStore({ planets: data.results, isLoading: false })
 				} catch (error) {
-					alert(error);
+					console.log(error);
 				}
 			},
 			loadCharactersDetails: async (id) => {
 				try {
-					const response = await fetch(`https://www.swapi.tech/api/people/${id}`, {
-						method: "GET",
-					});
+					const response = await fetch(`https://www.swapi.tech/api/people/${id}`);
 					const data = await response.json();
-					console.log("Api characters:", data);
-					setStore({ charactersDetails: data.result }); 
+					console.log("Character Details:", data);
+					setStore({ charactersDetails: data.result });
 				} catch (error) {
-					alert(error);
+					console.error('Error loading character details:', error);
+				}
+			},
+			loadPlanetsDetails: async (id) => {
+				try {
+					const response = await fetch(`https://www.swapi.tech/api/planets/${id}`);
+					const data = await response.json();
+					console.log("Planet Details:", data);
+					setStore({ planetsDetails: data.result });
+				} catch (error) {
+					console.error('Error loading planet details:', error);
+				}
+			},
+			loadVehiclesDetails: async (id) => {
+				try {
+					const response = await fetch(`https://www.swapi.tech/api/vehicles/${id}`);
+					const data = await response.json();
+					console.log("Planet Details:", data);
+					setStore({ vehiclesDetails: data.result });
+				} catch (error) {
+					console.error('Error loading planet details:', error);
 				}
 			},
 		}

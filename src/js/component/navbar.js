@@ -10,7 +10,7 @@ export const Navbar = ({ favorites, setFavorites }) => {
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 			<div className="container-fluid">
-				{/* Logo */}
+				
 				<Link className="navbar-brand" to="/" style={{ fontFamily: 'Star Jedi, sans-serif', fontSize: '2rem', color: '#FFD700' }}>
 					<img
 						src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Star_Wars_Logo..png"
@@ -18,24 +18,49 @@ export const Navbar = ({ favorites, setFavorites }) => {
 						style={{ width: '80px', height: '50px', marginRight: '10px' }}
 					/>
 				</Link>
-				{/* Botones de navegación */}
+				
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 					<span className="navbar-toggler-icon"></span>
 				</button>
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav ms-auto">
 						<li className="nav-item">
-							<a className="nav-link" href="#starwarsTitle" style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}>Home</a>
+							<Link to="/" className="nav-link" href="#starwarsTitle" style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }} onClick={() => window.scrollTo(0, 0)}>
+								<a>Home</a>
+							</Link>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#characters" style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}>Characters</a>
+							<Link
+								to="/"
+								className="nav-link"
+								style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}
+								onClick={() => setTimeout(() => document.getElementById('characters')?.scrollIntoView({ behavior: 'smooth' }), 500)}
+							>
+								Characters
+							</Link>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#vehicles" style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}>Vehicles</a>
+							<Link
+								to="/"
+								className="nav-link"
+								style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}
+								onClick={() => setTimeout(() => document.getElementById('vehicles')?.scrollIntoView({ behavior: 'smooth' }), 500)}
+							>
+								Vehicles
+							</Link>
 						</li>
+
 						<li className="nav-item">
-							<a className="nav-link" href="#planets" style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}>Planets</a>
+							<Link
+								to="/"
+								className="nav-link"
+								style={{ fontFamily: 'Orbitron, sans-serif', fontSize: '1.2rem', color: '#FFD700' }}
+								onClick={() => setTimeout(() => document.getElementById('planets')?.scrollIntoView({ behavior: 'smooth' }), 500)}
+							>
+								Planets
+							</Link>
 						</li>
+
 						<li>
 							<div className="btn-group">
 								<button
